@@ -54,9 +54,11 @@ function drawLines(stillColour){
 //However, as this code is used for breaking down the illusion, the noLoop() is commented out
 //so that the illusion can be redrawn correctly after user input interaction
 function draw() {
+    //150 is grey scale value (0=black, 255=white)
     background(150)
     c = int(colourMode.value());
     drawCircles(c);
     drawLines(c);
     //noLoop();
+    //^^^ this stops the page from refreshing 60/s
 }

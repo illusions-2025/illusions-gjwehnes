@@ -49,4 +49,5 @@ function draw() {
         drawDots();
     }
     //noLoop();
+    //^^^ this stops the page from refreshing 60/s
 }
