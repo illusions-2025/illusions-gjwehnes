@@ -39,7 +39,8 @@ function setup() {
 //if stillColour is truthy, image will be black or white
 //but not both (ie no illusion)
 function drawCircles(stillColour){
-
+    //draw circle at (100,100) with radius 50
+    ellipse(100,100,50,50)
 }
 
 //if stillColour is truthy, image will be black or white
