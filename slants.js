@@ -1,5 +1,12 @@
 
 let colourMode;
+const CIRCLE_WIDTH = 50
+const SCREEN_WIDTH = 1000
+const SCREEN_HEIGHT = 600
+const SIN_45 = Math.sin(45 * Math.PI / 180)
+const BAR_OFFSET = SIN_45 * (CIRCLE_WIDTH / 2) * (9/10)
+const BAR_WIDTH = (1 -  SIN_45) * 2 * (CIRCLE_WIDTH / 2) * (10/9)
+const BAR_HEIGHT = CIRCLE_WIDTH * 0.1
 
 //this function is called once at the start of a sketch
 function setup() {
@@ -8,7 +15,7 @@ function setup() {
 
     //create a drawing surface on to the web page
     //this drawing surface is 1000 X 600
-    canvas = createCanvas(1000,600);
+    canvas = createCanvas(SCREEN_WIDTH,SCREEN_HEIGHT);
 
     //move canvas to make way for radio buttons
     canvas.position(20,20);
@@ -31,7 +38,7 @@ function setup() {
     //to view the position as the centre of the shape
     //thus we need to shift the rec/ellipse modes to
     //refer to centre
-    rectMode(CENTER);
+    rectMode(CORNER);
     ellipseMode(CENTER);
 
 }
@@ -39,12 +46,31 @@ function setup() {
 //if stillColour is truthy, image will be black or white
 //but not both (ie no illusion)
 function drawCircles(stillColour){
-    //draw circle at (100,100) with radius 50
-    ellipse(100,100,50,50)
 
-    for (let x = 100; i < 1000; i+=50) {
-        ellipse(x,100,50,50)
-    }    
+	stroke(0)   //stroke color black
+	fill(0)     //fill color black
+	
+	let c = 0
+
+	for (let y = CIRCLE_WIDTH; y < SCREEN_HEIGHT; y+=CIRCLE_WIDTH * 2) {		
+	    for (let x = CIRCLE_WIDTH; x <  SCREEN_WIDTH; x+=CIRCLE_WIDTH) {
+			
+			if (stillColour == 0) {
+				c = 255 - 255 * (x % (CIRCLE_WIDTH * 2))
+			}
+			else if (stillColour == 1) {
+				c = 255
+			}
+			else {
+				c = 0
+			}
+			fill(c)
+	        ellipse(x,y,CIRCLE_WIDTH,CIRCLE_WIDTH)
+			rect(x + BAR_OFFSET,y - CIRCLE_WIDTH / 2,BAR_WIDTH ,BAR_HEIGHT)
+			fill(255 - c)
+			rect(x + BAR_OFFSET,y + CIRCLE_WIDTH / 2 - BAR_HEIGHT,BAR_WIDTH ,BAR_HEIGHT)
+	    }    
+	}
 }
 
 //if stillColour is truthy, image will be black or white
