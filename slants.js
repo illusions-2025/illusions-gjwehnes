@@ -41,6 +41,10 @@ function setup() {
 function drawCircles(stillColour){
     //draw circle at (100,100) with radius 50
     ellipse(100,100,50,50)
+
+    for (let x = 100; i < 1000; i+=50) {
+        ellipse(x,100,50,50)
+    }    
 }
 
 //if stillColour is truthy, image will be black or white
